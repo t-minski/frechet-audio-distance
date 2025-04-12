@@ -80,12 +80,12 @@ class FrechetAudioDistance:
         self.audio_load_worker = audio_load_worker
         self.enable_fusion = enable_fusion
         if ckpt_dir is not None:
-            os.makedirs(ckpt_dir, exist_ok=True)
             torch.hub.set_dir(ckpt_dir)
             self.ckpt_dir = ckpt_dir
         else:
             # by default `ckpt_dir` is `torch.hub.get_dir()`
             self.ckpt_dir = torch.hub.get_dir()
+        os.makedirs(self.ckpt_dir, exist_ok=True)
         self.__get_model(model_name=model_name, use_pca=use_pca, use_activation=use_activation)
 
     def __get_model(self, model_name="vggish", use_pca=False, use_activation=False):
